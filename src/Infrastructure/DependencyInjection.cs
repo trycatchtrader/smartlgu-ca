@@ -1,4 +1,6 @@
 ﻿using SmartLGU.Application.Common.Interfaces;
+using SmartLGU.Application.Residents.Services;
+using SmartLGU.Infrastructure.Residents;
 using SmartLGU.Infrastructure.Data;
 using SmartLGU.Infrastructure.Data.Interceptors;
 using SmartLGU.Infrastructure.Identity;
@@ -52,5 +54,6 @@ public static class DependencyInjection
 
         builder.Services.AddSingleton(TimeProvider.System);
         builder.Services.AddTransient<IIdentityService, IdentityService>();
+        builder.Services.AddSingleton<IResidentDataProvider, MockResidentDataProvider>();
     }
 }
