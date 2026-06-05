@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { Bell, Search } from 'lucide-react';
+import { Bell, Command, Plus, Search } from 'lucide-react';
 import { navSections } from '../smartlguData';
 import { ThemeToggle } from './ThemeToggle';
 
@@ -43,9 +43,14 @@ export function NavMenu() {
           <strong>LGU Digital Governance Workspace</strong>
         </div>
         <div className="topbar-actions">
-          <button className="ghost-button" type="button" aria-label="Search prototype">
+          <label className="topbar-search" aria-label="Search prototype">
             <Search size={18} />
-            <span>Search</span>
+            <input type="search" placeholder="Search residents, cases, modules..." />
+            <kbd><Command size={13} />K</kbd>
+          </label>
+          <button className="ghost-button ghost-button--primary" type="button">
+            <Plus size={18} />
+            <span>New request</span>
           </button>
           <button className="icon-only" type="button" aria-label="Notifications">
             <Bell size={18} />
