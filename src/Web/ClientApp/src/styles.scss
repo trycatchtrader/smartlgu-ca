@@ -1,347 +1,561 @@
-@use "sass:map";
 @use "@picocss/pico/scss/index" as * with (
-  $theme-color: "violet",
+  $theme-color: "blue",
   $semantic-root-element: "#root",
-  $enable-semantic-container: true,
+  $enable-semantic-container: false,
   $enable-classes: false
 );
 
-// ── Base font size & typography ───────────────────────────────────────────────
-html {
-  font-size: 95%;
-}
-
 :root {
-  --pico-font-family-sans-serif: "Inter", system-ui, sans-serif;
-  --pico-font-family-headings: "Outfit", sans-serif;
-  --pico-font-family-monospace: "JetBrains Mono", monospace;
-  --pico-border-radius: 0.375rem;
-  --pico-line-height: 1.5;
+  --pico-font-family-sans-serif: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --pico-font-family-headings: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --pico-border-radius: 1rem;
+  --shell-sidebar-width: 19rem;
+  --shell-topbar-height: 5rem;
+  --surface-soft: color-mix(in srgb, var(--pico-card-background-color) 88%, var(--pico-primary) 12%);
+  --surface-line: color-mix(in srgb, var(--pico-muted-border-color) 75%, transparent);
+  --brand-gradient: linear-gradient(135deg, #0f766e 0%, #2563eb 52%, #7c3aed 100%);
 }
 
-// ── Header ────────────────────────────────────────────────────────────────────
-:root {
-  --header-height: 4.5rem;
+* {
+  box-sizing: border-box;
 }
 
-#root > header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  width: 100%;
-  max-width: none;
-  height: var(--header-height);
-  padding: 0;
+body {
   margin: 0;
-  z-index: 100;
-  background: color-mix(in srgb, var(--pico-background-color) 85%, transparent);
-  backdrop-filter: blur(8px);
-  border-bottom: 1px solid var(--pico-muted-border-color);
+  min-width: 320px;
+  background:
+    radial-gradient(circle at top left, color-mix(in srgb, var(--pico-primary) 18%, transparent), transparent 34rem),
+    linear-gradient(180deg, color-mix(in srgb, var(--pico-background-color) 94%, #dbeafe 6%), var(--pico-background-color));
 }
 
-#root > header nav {
-  height: 100%;
-  display: flex;
-  align-items: center;
-  width: 100%;
-  margin-inline: auto;
-  padding-inline: var(--pico-block-spacing-horizontal);
-
-  @media (min-width: 576px)  { max-width: 510px;  padding-inline: 0; }
-  @media (min-width: 768px)  { max-width: 700px; }
-  @media (min-width: 1024px) { max-width: 950px; }
-  @media (min-width: 1280px) { max-width: 1200px; }
-  @media (min-width: 1536px) { max-width: 1450px; }
-}
-
-// ── Main content ──────────────────────────────────────────────────────────────
-#root > main {
-  padding-top: calc(var(--header-height) + var(--pico-block-spacing-vertical) * 2);
-}
-
-// ── Nav brand ─────────────────────────────────────────────────────────────────
-#root > header nav > ul:first-child a {
-  font-family: "Outfit", sans-serif;
-  font-size: 1.75rem;
-  font-weight: 700;
-  text-decoration: none;
-  color: var(--pico-contrast);
-}
-
-// ── Login / Register centered layout ──────────────────────────────────────────
-#root > main:has(> article:only-child) {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+.app-shell {
   min-height: 100vh;
-
-  > article {
-    width: 100%;
-    max-width: map.get(map.get($breakpoints, "md"), "viewport");
-  }
 }
 
-// ── Danger color — more vivid in dark mode ────────────────────────────────────
-[data-theme="dark"] {
-  --pico-del-color: #f05050;
+.sidebar {
+  position: fixed;
+  inset: 0 auto 0 0;
+  z-index: 40;
+  width: var(--shell-sidebar-width);
+  padding: 1.25rem;
+  overflow-y: auto;
+  background: color-mix(in srgb, var(--pico-card-background-color) 92%, transparent);
+  border-right: 1px solid var(--surface-line);
+  backdrop-filter: blur(16px);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --pico-del-color: #f05050;
-  }
-}
-
-// ── Nav separator ─────────────────────────────────────────────────────────────
-.nav-separator {
-  width: 1px;
-  height: 1.2rem;
-  background: var(--pico-muted-border-color);
-  padding: 0;
-  margin-inline: 0.25rem;
-}
-
-// ── Theme toggle ───────────────────────────────────────────────────────────────
-.theme-toggle-btn {
-  background: none;
-  border: none;
-  box-shadow: none;
-  padding: 0;
-  line-height: 1;
-  color: var(--pico-muted-color);
-  cursor: pointer;
-  --pico-form-element-spacing-vertical: 0;
-  --pico-form-element-spacing-horizontal: 0;
-
-  &:hover {
-    background: none;
-    color: var(--pico-primary);
-  }
-}
-
-// ── Icon buttons ───────────────────────────────────────────────────────────────
-.icon-btn {
-  display: inline-flex;
+.brand {
+  display: flex;
   align-items: center;
-  justify-content: center;
-  width: 2rem;
-  height: 2rem;
-  padding: 0;
-  font-size: 1.25rem;
-  font-weight: bold;
-  line-height: 1;
-  flex-shrink: 0;
-  background: transparent !important;
-  border-color: transparent !important;
-  color: var(--pico-muted-color);
-  box-shadow: none !important;
-  --pico-form-element-spacing-vertical: 0;
-  --pico-form-element-spacing-horizontal: 0;
-
-  &:hover {
-    color: var(--pico-primary);
-  }
+  gap: 0.85rem;
+  margin-bottom: 1.5rem;
+  color: var(--pico-contrast);
+  text-decoration: none;
 }
 
-// ── Todo layout ───────────────────────────────────────────────────────────────
-.todo-layout {
+.brand:hover {
+  text-decoration: none;
+}
+
+.brand-mark {
   display: grid;
-  grid-template-columns: 220px 1fr;
-  gap: calc(var(--pico-block-spacing-horizontal) * 2);
-  align-items: start;
+  width: 3rem;
+  height: 3rem;
+  place-items: center;
+  border-radius: 1rem;
+  color: white;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  background: var(--brand-gradient);
+  box-shadow: 0 1rem 2.5rem color-mix(in srgb, var(--pico-primary) 28%, transparent);
 }
 
-.todo-sidebar {
-  border-right: 1px solid var(--pico-muted-border-color);
-  padding-right: calc(var(--pico-block-spacing-horizontal) * 2);
-
-  ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  li {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: calc(var(--pico-spacing) * 0.4) calc(var(--pico-spacing) * 0.5);
-    border-radius: var(--pico-border-radius);
-    cursor: pointer;
-    color: var(--pico-muted-color);
-
-    &[aria-current="true"] {
-      background: var(--pico-primary-background);
-      color: var(--pico-primary-inverse);
-    }
-
-    &:hover:not([aria-current="true"]) {
-      background: var(--pico-card-sectioning-background-color);
-      color: var(--pico-color);
-    }
-
-    small {
-      font-size: 0.75rem;
-      opacity: 0.7;
-    }
-  }
+.brand strong,
+.user-badge span {
+  display: block;
 }
 
-.todo-main {
-  min-width: 0;
-  padding-left: var(--pico-spacing);
-}
-
-.todo-panel-header {
-  display: flex;
-  align-items: baseline;
-  gap: 0.25rem;
-  margin-bottom: var(--pico-spacing);
-}
-
-.todo-item {
-  display: flex;
-  align-items: baseline;
-  gap: calc(var(--pico-spacing) * 0.5);
-  padding-block: calc(var(--pico-spacing) * 0.35);
-  border-bottom: 1px solid var(--pico-muted-border-color);
-
-  input[type="checkbox"] {
-    margin: 0;
-    flex-shrink: 0;
-    align-self: center;
-  }
-}
-
-.todo-item-text {
-  flex: 1;
-  cursor: pointer;
-  word-break: break-word;
-}
-
-.todo-done {
-  text-decoration: line-through;
+.brand small,
+.user-badge small,
+.metric-card small,
+.workflow-steps small {
   color: var(--pico-muted-color);
 }
 
-.todo-item-input {
-  flex: 1;
-  align-self: center;
-  margin: 0 !important;
-  padding: 0;
-  min-height: unset;
-  --pico-form-element-spacing-horizontal: 0;
-  --pico-form-element-spacing-vertical: 0;
-  border: none;
-  border-bottom: 1px solid var(--pico-primary);
-  border-radius: 0;
-  background: transparent;
-  box-shadow: none;
-
-  &:not(:focus) {
-    border-bottom-color: transparent;
-  }
+.sidebar-nav section {
+  margin-top: 1.25rem;
 }
 
-.todo-new-item {
-  border-bottom: none;
-
-  input[type="checkbox"] {
-    opacity: 0.3;
-  }
-}
-
-.todo-new-item-placeholder {
+.sidebar-nav p {
+  margin: 0 0 0.5rem;
   color: var(--pico-muted-color);
-  cursor: pointer;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
-.colour-dot {
-  display: inline-block;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
-.colour-picker {
+.nav-item {
   display: flex;
-  gap: 0.5rem;
-  margin-bottom: var(--pico-spacing);
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.25rem;
+  padding: 0.7rem 0.8rem;
+  border-radius: 0.85rem;
+  color: var(--pico-muted-color);
+  text-decoration: none;
 }
 
-.colour-swatch {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  border: 2px solid var(--pico-muted-border-color);
-  cursor: pointer;
-  padding: 0;
-
-  &.selected {
-    border-color: var(--pico-primary);
-    box-shadow: 0 0 0 2px var(--pico-primary);
-  }
+.nav-item:hover,
+.nav-item.active {
+  color: var(--pico-contrast);
+  text-decoration: none;
+  background: var(--surface-soft);
 }
 
-// ── Dialog header/footer ───────────────────────────────────────────────────────
-dialog article header {
+.nav-item.active {
+  box-shadow: inset 0 0 0 1px var(--surface-line);
+}
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 30;
   display: flex;
   align-items: center;
   justify-content: space-between;
-
-  > :first-child {
-    margin: 0;
-  }
-
-  > button[rel="prev"] {
-    position: static;
-    margin: 0;
-    margin-inline-start: auto;
-    flex-shrink: 0;
-  }
+  height: var(--shell-topbar-height);
+  margin-left: var(--shell-sidebar-width);
+  padding: 0 2rem;
+  background: color-mix(in srgb, var(--pico-background-color) 78%, transparent);
+  border-bottom: 1px solid var(--surface-line);
+  backdrop-filter: blur(16px);
 }
 
-dialog article footer {
+.topbar strong {
+  display: block;
+  font-size: 1.05rem;
+}
+
+.topbar-actions,
+.hero-actions,
+.package-card__header,
+.workflow-steps,
+.user-badge,
+.section-heading {
   display: flex;
-  justify-content: flex-end;
   align-items: center;
-  gap: calc(var(--pico-spacing) * 0.5);
 }
 
-// ── Button variants (not compiled in classless mode — defined manually) ───────
-button.secondary,
-[type="submit"].secondary,
-[type="button"].secondary,
-[role="button"].secondary {
-  --pico-background-color: transparent;
-  --pico-border-color: var(--pico-secondary);
-  --pico-color: var(--pico-secondary);
+.topbar-actions {
+  gap: 0.75rem;
+}
 
-  &:is(:hover, :active, :focus) {
-    --pico-background-color: color-mix(in srgb, var(--pico-secondary) 10%, transparent);
-    --pico-border-color: var(--pico-secondary-hover);
-    --pico-color: var(--pico-secondary-hover);
+.ghost-button,
+.icon-only,
+.theme-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  margin: 0;
+  padding: 0.55rem 0.75rem;
+  border: 1px solid var(--surface-line);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--pico-card-background-color) 86%, transparent);
+  color: var(--pico-muted-color);
+  box-shadow: none;
+}
+
+.icon-only,
+.theme-toggle-btn {
+  width: 2.55rem;
+  height: 2.55rem;
+  padding: 0;
+}
+
+.ghost-button:hover,
+.icon-only:hover,
+.theme-toggle-btn:hover {
+  color: var(--pico-primary);
+  border-color: color-mix(in srgb, var(--pico-primary) 34%, var(--surface-line));
+}
+
+.user-badge {
+  gap: 0.55rem;
+  padding-left: 0.35rem;
+}
+
+.user-badge span {
+  display: grid;
+  width: 2.45rem;
+  height: 2.45rem;
+  place-items: center;
+  border-radius: 999px;
+  color: white;
+  font-weight: 800;
+  background: #0f766e;
+}
+
+.app-main {
+  width: auto;
+  max-width: none;
+  margin-left: var(--shell-sidebar-width);
+  padding: 2rem;
+}
+
+.page-stack {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.hero-panel,
+.module-hero,
+.workflow-card,
+.side-panel,
+.metric-card,
+.package-card {
+  border: 1px solid var(--surface-line);
+  background: color-mix(in srgb, var(--pico-card-background-color) 92%, transparent);
+  box-shadow: 0 1.5rem 4rem color-mix(in srgb, #0f172a 10%, transparent);
+}
+
+.hero-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 19rem;
+  gap: 1.5rem;
+  align-items: stretch;
+  padding: clamp(1.5rem, 3vw, 3rem);
+  border-radius: 1.5rem;
+  overflow: hidden;
+}
+
+.hero-panel h1,
+.module-hero h1 {
+  max-width: 58rem;
+  margin-bottom: 1rem;
+  font-size: clamp(2.25rem, 5vw, 4.7rem);
+  line-height: 0.98;
+  letter-spacing: -0.06em;
+}
+
+.hero-copy,
+.module-hero p {
+  max-width: 48rem;
+  color: var(--pico-muted-color);
+  font-size: 1.08rem;
+}
+
+.eyebrow {
+  margin: 0 0 0.35rem;
+  color: var(--pico-primary);
+  font-size: 0.75rem;
+  font-weight: 850;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.hero-actions {
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+}
+
+.hero-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  min-height: 20rem;
+  padding: 1.25rem;
+  border-radius: 1.25rem;
+  color: white;
+  background: var(--brand-gradient);
+}
+
+.hero-card span,
+.hero-card p {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.hero-card strong {
+  display: block;
+  margin: 0.45rem 0;
+  font-size: 2.5rem;
+  letter-spacing: -0.05em;
+}
+
+.metric-grid,
+.package-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.metric-card,
+.package-card,
+.workflow-card,
+.side-panel {
+  margin: 0;
+  padding: 1.25rem;
+  border-radius: 1.25rem;
+}
+
+.metric-card span,
+.package-card__header span {
+  color: var(--pico-muted-color);
+  font-size: 0.86rem;
+}
+
+.metric-card strong {
+  display: block;
+  margin: 0.45rem 0 0.2rem;
+  font-size: 2rem;
+  letter-spacing: -0.05em;
+}
+
+.section-heading {
+  align-items: end;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.section-heading h2,
+.section-heading p {
+  margin-bottom: 0;
+}
+
+.section-heading > p:last-child {
+  max-width: 34rem;
+  color: var(--pico-muted-color);
+}
+
+.section-heading--compact {
+  display: block;
+}
+
+.package-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.package-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.package-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 0.35rem;
+  background: #2563eb;
+}
+
+.package-card--green::before {
+  background: #0f766e;
+}
+
+.package-card--violet::before {
+  background: #7c3aed;
+}
+
+.package-card__header {
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.package-card__header strong,
+.status-pill {
+  border-radius: 999px;
+  padding: 0.25rem 0.55rem;
+  color: var(--pico-primary);
+  background: color-mix(in srgb, var(--pico-primary) 13%, transparent);
+  font-size: 0.78rem;
+}
+
+.module-chip-list,
+.related-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.module-chip,
+.related-list a {
+  padding: 0.45rem 0.65rem;
+  border: 1px solid var(--surface-line);
+  border-radius: 999px;
+  color: var(--pico-muted-color);
+  font-size: 0.86rem;
+  text-decoration: none;
+}
+
+.module-chip:hover,
+.related-list a:hover,
+.related-list a[aria-current="page"] {
+  color: var(--pico-primary);
+  border-color: color-mix(in srgb, var(--pico-primary) 38%, var(--surface-line));
+  text-decoration: none;
+}
+
+.module-hero {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+  border-radius: 1.5rem;
+}
+
+.module-icon {
+  display: grid;
+  width: 4.25rem;
+  height: 4.25rem;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 1.25rem;
+  color: white;
+  background: var(--brand-gradient);
+}
+
+.module-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 22rem;
+  gap: 1.25rem;
+  align-items: start;
+}
+
+.workflow-steps {
+  gap: 0.85rem;
+  margin: 1.25rem 0;
+}
+
+.workflow-steps div {
+  flex: 1;
+  padding: 1rem;
+  border: 1px solid var(--surface-line);
+  border-radius: 1rem;
+  background: var(--surface-soft);
+}
+
+.workflow-steps span,
+.workflow-steps strong,
+.workflow-steps small {
+  display: block;
+}
+
+.workflow-steps span {
+  color: var(--pico-primary);
+  font-weight: 850;
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+.table-wrap table {
+  margin-bottom: 0;
+}
+
+.side-panel h2,
+.side-panel h3 {
+  margin-bottom: 0.75rem;
+}
+
+.side-panel dl {
+  margin-bottom: 1.25rem;
+}
+
+.side-panel dl div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--surface-line);
+}
+
+.side-panel dt {
+  color: var(--pico-muted-color);
+}
+
+.side-panel dd {
+  margin: 0;
+  text-align: right;
+  font-weight: 700;
+}
+
+@media (max-width: 1180px) {
+  :root {
+    --shell-sidebar-width: 16.5rem;
+  }
+
+  .metric-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .package-grid,
+  .module-layout,
+  .hero-panel {
+    grid-template-columns: 1fr;
   }
 }
 
-button.danger,
-[type="submit"].danger,
-[type="button"].danger,
-[role="button"].danger {
-  --pico-background-color: transparent;
-  --pico-border-color: var(--pico-del-color);
-  --pico-color: var(--pico-del-color);
+@media (max-width: 860px) {
+  .sidebar {
+    position: static;
+    width: auto;
+    max-height: none;
+    border-right: 0;
+    border-bottom: 1px solid var(--surface-line);
+  }
 
-  &:is(:hover, :active, :focus) {
-    --pico-background-color: color-mix(in srgb, var(--pico-del-color) 10%, transparent);
-    --pico-border-color: color-mix(in srgb, var(--pico-del-color) 80%, black);
-    --pico-color: color-mix(in srgb, var(--pico-del-color) 80%, black);
+  .sidebar-nav {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .topbar,
+  .app-main {
+    margin-left: 0;
+  }
+
+  .topbar {
+    height: auto;
+    padding: 1rem;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .topbar-actions {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  .app-main {
+    padding: 1rem;
   }
 }
 
-.error {
-  color: var(--pico-del-color);
+@media (max-width: 640px) {
+  .sidebar-nav,
+  .metric-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-panel h1,
+  .module-hero h1 {
+    font-size: 2.3rem;
+  }
+
+  .module-hero,
+  .workflow-steps,
+  .section-heading,
+  .topbar {
+    display: block;
+  }
+
+  .workflow-steps div {
+    margin-bottom: 0.75rem;
+  }
 }
