@@ -1680,3 +1680,161 @@ body {
     grid-template-columns: 1fr;
   }
 }
+
+/* Expensify-inspired palette and metric layout fix */
+:root,
+[data-theme="dark"],
+[data-theme="light"] {
+  --canvas: #0b2b23;
+  --sidebar: #082b22;
+  --sidebar-strong: #123d32;
+  --sidebar-soft: rgba(83, 214, 137, 0.1);
+  --panel: #ffffff;
+  --panel-strong: #ffffff;
+  --panel-soft: #f4f7f5;
+  --border: #dfe7e3;
+  --border-strong: #c6d4ce;
+  --text: #0b1f1a;
+  --muted: #52675f;
+  --muted-2: #84928d;
+  --brand: #53d689;
+  --brand-soft: rgba(83, 214, 137, 0.16);
+  --green: #53d689;
+  --amber: #d4b15f;
+  --pink: #e6819e;
+  --violet: #78a879;
+  --sidebar-text: #f4fff8;
+  --sidebar-muted: #abc0b8;
+  --sidebar-border: rgba(197, 232, 216, 0.14);
+  --shadow: 0 1.8rem 5rem rgba(8, 43, 34, 0.22);
+}
+
+body {
+  background:
+    radial-gradient(circle at 8% 10%, rgba(83, 214, 137, 0.2), transparent 24rem),
+    linear-gradient(90deg, #082b22 0%, #082b22 var(--shell-sidebar-width), #f7f7f3 var(--shell-sidebar-width), #ffffff 100%);
+}
+
+.brand-mark,
+.docs-hero__mark,
+.module-icon,
+.product-card__icon,
+.starter-panel__heading > span,
+.resident-metric__icon {
+  color: #082b22;
+  background: linear-gradient(135deg, #63dfa0 0%, #53d689 55%, #32b56f 100%);
+  box-shadow: 0 1rem 2.2rem rgba(83, 214, 137, 0.28);
+}
+
+.sidebar {
+  background:
+    linear-gradient(180deg, rgba(83, 214, 137, 0.06), rgba(8, 43, 34, 0)),
+    var(--sidebar);
+}
+
+.sidebar-overview {
+  background:
+    linear-gradient(135deg, rgba(83, 214, 137, 0.16), rgba(255, 255, 255, 0.025)),
+    #153d32;
+}
+
+.sidebar-overview span,
+.nav-item__icon,
+.text-link,
+.back-link,
+.docs-link-list a:hover,
+.related-list a:hover,
+.related-list a[aria-current="page"],
+.module-chip:hover {
+  color: var(--brand);
+}
+
+.nav-section--cyan,
+.nav-section--lime,
+.nav-section--violet,
+.nav-section--amber {
+  --section-accent: #53d689;
+}
+
+.nav-item:hover,
+.nav-item.active {
+  background: linear-gradient(90deg, rgba(83, 214, 137, 0.16), rgba(255, 255, 255, 0.04));
+  border-color: rgba(83, 214, 137, 0.18);
+}
+
+.content-panel {
+  background:
+    radial-gradient(circle at 88% 0%, rgba(83, 214, 137, 0.08), transparent 22rem),
+    linear-gradient(180deg, #ffffff 0%, #fbfbf7 100%);
+  border-color: rgba(223, 231, 227, 0.95);
+}
+
+.topbar,
+[data-theme="light"] .topbar,
+[data-theme="dark"] .topbar {
+  background: rgba(255, 255, 255, 0.82);
+  border-bottom-color: #e7eeea;
+}
+
+.demo-badge,
+.module-hero__actions span,
+.status-pill,
+.resident-status {
+  color: #0b5b35;
+  background: rgba(83, 214, 137, 0.16);
+  border-color: rgba(83, 214, 137, 0.24);
+}
+
+.docs-hero,
+.module-hero,
+.resident-profile-hero {
+  background:
+    radial-gradient(circle at 0% 20%, rgba(83, 214, 137, 0.1), transparent 18rem),
+    linear-gradient(135deg, #ffffff 0%, #f6f8f4 100%);
+}
+
+.docs-hero__intro .hero-metrics {
+  grid-column: 2;
+}
+
+.hero-metrics div,
+.package-chip,
+.starter-panel,
+.product-card,
+.guide-card,
+.workflow-card,
+.side-panel,
+.metric-card,
+.resident-profile-hero,
+.resident-contact-card,
+.workflow-steps div,
+.resident-detail-item {
+  border-color: #dfe7e3;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.package-chip--blue,
+.package-chip--green,
+.package-chip--violet {
+  --chip-accent: #53d689;
+}
+
+.starter-tile:hover,
+.product-card:hover,
+.guide-card:hover,
+[data-theme="light"] .starter-tile:hover,
+[data-theme="light"] .product-card:hover,
+[data-theme="light"] .guide-card:hover {
+  border-color: rgba(83, 214, 137, 0.38);
+  box-shadow: 0 1.25rem 2.7rem rgba(8, 43, 34, 0.1);
+}
+
+@media (max-width: 860px) {
+  body {
+    background: linear-gradient(180deg, #082b22 0%, #082b22 18rem, #f7f7f3 18rem, #ffffff 100%);
+  }
+
+  .docs-hero__intro .hero-metrics {
+    grid-column: 1;
+  }
+}
