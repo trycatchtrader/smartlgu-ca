@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { Bell, Github, Search } from 'lucide-react';
+import { Bell, Search } from 'lucide-react';
 import { navSections } from '../smartlguData';
 import { ThemeToggle } from './ThemeToggle';
 
@@ -46,8 +46,8 @@ export function NavMenu() {
         <div className="topbar-actions">
           <a className="topbar-link" href="/" aria-label="SmartLGU site">SmartLGU.gov</a>
           <button className="sign-up-button" type="button">Sign up</button>
-          <button className="icon-only" type="button" aria-label="GitHub repository">
-            <Github size={17} />
+          <button className="icon-only" type="button" aria-label="Repository">
+            <span aria-hidden="true">GH</span>
           </button>
           <button className="icon-only" type="button" aria-label="Notifications">
             <Bell size={17} />
