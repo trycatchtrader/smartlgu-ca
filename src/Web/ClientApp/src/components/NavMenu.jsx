@@ -13,7 +13,6 @@ export function NavMenu() {
         <span className="brand-mark"><Landmark size={20} /></span>
         <span>
           <strong>SmartLGU</strong>
-          <small>LGU IDS Prototype</small>
         </span>
       </NavLink>
 

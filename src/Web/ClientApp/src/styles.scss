@@ -1838,3 +1838,12 @@ body {
     grid-column: 1;
   }
 }
+
+/* Sidebar cleanup from review feedback */
+.sidebar-nav section {
+  padding-left: 0;
+}
+
+.sidebar-nav section::before {
+  display: none;
+}
