@@ -11,7 +11,7 @@ export function NavMenu() {
           <span className="brand-mark">S</span>
           <span>
             <strong>SmartLGU</strong>
-            <small>DOCS</small>
+            <small>DIGITAL</small>
           </span>
         </NavLink>
 
@@ -38,9 +38,9 @@ export function NavMenu() {
       </aside>
 
       <header className="topbar">
-        <label className="topbar-search" aria-label="Search docs">
+        <label className="topbar-search" aria-label="Search prototype">
           <Search size={18} />
-          <input type="search" placeholder="Search docs..." />
+          <input type="search" placeholder="Search residents, cases, modules..." />
           <kbd>Ctrl K</kbd>
         </label>
         <div className="topbar-actions">
