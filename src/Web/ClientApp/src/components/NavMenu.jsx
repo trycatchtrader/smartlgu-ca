@@ -8,10 +8,10 @@ export function NavMenu() {
     <>
       <aside className="sidebar" aria-label="SmartLGU module navigation">
         <NavLink className="brand" to="/" aria-label="SmartLGU home">
-          <span className="brand-mark">SL</span>
+          <span className="brand-mark">S</span>
           <span>
             <strong>SmartLGU</strong>
-            <small>Digital Governance</small>
+            <small>DIGITAL</small>
           </span>
         </NavLink>
 
@@ -27,7 +27,7 @@ export function NavMenu() {
                     to={item.path}
                     key={item.path}
                   >
-                    <Icon size={18} />
+                    <Icon size={16} />
                     <span>{item.title}</span>
                   </NavLink>
                 );
@@ -38,23 +38,21 @@ export function NavMenu() {
       </aside>
 
       <header className="topbar">
-        <div>
-          <p className="eyebrow">Presentation Prototype</p>
-          <strong>LGU Digital Governance Workspace</strong>
-        </div>
+        <label className="topbar-search" aria-label="Search prototype">
+          <Search size={18} />
+          <input type="search" placeholder="Search residents, cases, modules..." />
+          <kbd>Ctrl K</kbd>
+        </label>
         <div className="topbar-actions">
-          <button className="ghost-button" type="button" aria-label="Search prototype">
-            <Search size={18} />
-            <span>Search</span>
+          <a className="topbar-link" href="/" aria-label="SmartLGU site">SmartLGU.gov</a>
+          <button className="sign-up-button" type="button">Sign up</button>
+          <button className="icon-only" type="button" aria-label="Repository">
+            <span aria-hidden="true">GH</span>
           </button>
           <button className="icon-only" type="button" aria-label="Notifications">
-            <Bell size={18} />
+            <Bell size={17} />
           </button>
           <ThemeToggle />
-          <div className="user-badge" aria-label="Signed in demo user">
-            <span>MA</span>
-            <small>Municipal Admin</small>
-          </div>
         </div>
       </header>
     </>
