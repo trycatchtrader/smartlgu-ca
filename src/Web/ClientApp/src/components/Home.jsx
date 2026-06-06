@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight, BookOpen, Database, FileText, Play, ShieldCheck, UserPlus } from 'lucide-react';
-import { moduleCatalog } from '../smartlguData';
+import { dashboardMetrics, moduleCatalog, packageGroups } from '../smartlguData';
 
 const starterModules = [
   'Resident Registration',
@@ -36,6 +36,14 @@ export function Home() {
             staff, barangay partners, and citizens can navigate core municipal services
             from one integrated platform.
           </p>
+          <dl className="hero-metrics" aria-label="SmartLGU demo metrics">
+            {dashboardMetrics.slice(0, 3).map((metric) => (
+              <div key={metric.label}>
+                <dt>{metric.label}</dt>
+                <dd>{metric.value}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
 
         <aside className="starter-panel" aria-label="Getting started shortcuts">
@@ -65,6 +73,14 @@ export function Home() {
         <div className="section-heading section-heading--compact">
           <p className="eyebrow">Platform packages</p>
           <h2 id="products-title">SmartLGU module roadmap</h2>
+        </div>
+        <div className="package-ribbon" aria-label="SmartLGU package coverage">
+          {packageGroups.map((group) => (
+            <article className={`package-chip package-chip--${group.accent}`} key={group.name}>
+              <strong>{group.name.replace(' LGU IDS Platform', '')}</strong>
+              <span>{group.modules.length} modules</span>
+            </article>
+          ))}
         </div>
         <div className="product-grid">
           {productModules.map((module) => {
