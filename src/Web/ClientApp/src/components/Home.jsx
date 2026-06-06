@@ -29,11 +29,12 @@ export function Home() {
           <div className="docs-hero__mark" aria-hidden="true">
             <span><BookOpen size={28} /></span>
           </div>
-          <p className="eyebrow">SmartLGU docs</p>
-          <h1 id="docs-title">SmartLGU Documentation</h1>
+          <p className="eyebrow">SmartLGU Prototype Foundation</p>
+          <h1 id="docs-title">Digital governance command center for modern Local Government Units.</h1>
           <p className="hero-copy">
-            Learn how to run a clickable LGU service prototype through resident intake,
-            barangay workflows, social services, payments, alerts, and operating reports.
+            A clickable, presentation-ready prototype showing how LGU administrators,
+            staff, barangay partners, and citizens can navigate core municipal services
+            from one integrated platform.
           </p>
         </div>
 
@@ -62,8 +63,8 @@ export function Home() {
 
       <section className="docs-section" aria-labelledby="products-title">
         <div className="section-heading section-heading--compact">
-          <p className="eyebrow">Products</p>
-          <h2 id="products-title">Explore prototype modules</h2>
+          <p className="eyebrow">Platform packages</p>
+          <h2 id="products-title">SmartLGU module roadmap</h2>
         </div>
         <div className="product-grid">
           {productModules.map((module) => {
