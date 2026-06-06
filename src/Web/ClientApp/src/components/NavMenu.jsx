@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { Bell, Command, Plus, Search } from 'lucide-react';
+import { Bell, Github, Search } from 'lucide-react';
 import { navSections } from '../smartlguData';
 import { ThemeToggle } from './ThemeToggle';
 
@@ -8,10 +8,10 @@ export function NavMenu() {
     <>
       <aside className="sidebar" aria-label="SmartLGU module navigation">
         <NavLink className="brand" to="/" aria-label="SmartLGU home">
-          <span className="brand-mark">SL</span>
+          <span className="brand-mark">S</span>
           <span>
             <strong>SmartLGU</strong>
-            <small>Digital Governance</small>
+            <small>DOCS</small>
           </span>
         </NavLink>
 
@@ -27,7 +27,7 @@ export function NavMenu() {
                     to={item.path}
                     key={item.path}
                   >
-                    <Icon size={18} />
+                    <Icon size={16} />
                     <span>{item.title}</span>
                   </NavLink>
                 );
@@ -38,28 +38,21 @@ export function NavMenu() {
       </aside>
 
       <header className="topbar">
-        <div>
-          <p className="eyebrow">Presentation Prototype</p>
-          <strong>LGU Digital Governance Workspace</strong>
-        </div>
+        <label className="topbar-search" aria-label="Search docs">
+          <Search size={18} />
+          <input type="search" placeholder="Search docs..." />
+          <kbd>Ctrl K</kbd>
+        </label>
         <div className="topbar-actions">
-          <label className="topbar-search" aria-label="Search prototype">
-            <Search size={18} />
-            <input type="search" placeholder="Search residents, cases, modules..." />
-            <kbd><Command size={13} />K</kbd>
-          </label>
-          <button className="ghost-button ghost-button--primary" type="button">
-            <Plus size={18} />
-            <span>New request</span>
+          <a className="topbar-link" href="/" aria-label="SmartLGU site">SmartLGU.gov</a>
+          <button className="sign-up-button" type="button">Sign up</button>
+          <button className="icon-only" type="button" aria-label="GitHub repository">
+            <Github size={17} />
           </button>
           <button className="icon-only" type="button" aria-label="Notifications">
-            <Bell size={18} />
+            <Bell size={17} />
           </button>
           <ThemeToggle />
-          <div className="user-badge" aria-label="Signed in demo user">
-            <span>MA</span>
-            <small>Municipal Admin</small>
-          </div>
         </div>
       </header>
     </>
