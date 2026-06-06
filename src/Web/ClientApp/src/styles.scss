@@ -12,7 +12,6 @@
   --pico-border-radius: 0.5rem;
   --shell-sidebar-width: 15.75rem;
   --shell-topbar-height: 4.35rem;
-  --page-max-width: 86rem;
   --canvas: #121212;
   --sidebar: #191919;
   --panel: #1b1b1b;
@@ -307,9 +306,10 @@ a {
 .page-stack {
   display: grid;
   gap: 2rem;
-  width: min(var(--page-max-width), calc(100vw - var(--shell-sidebar-width) - 3rem));
-  margin: 0 auto;
-  padding: 4.8rem 0 4rem;
+  width: auto;
+  max-width: none;
+  margin: 0;
+  padding: 4.8rem clamp(1.5rem, 2vw, 2.5rem) 4rem;
 }
 
 .docs-home {
@@ -319,7 +319,7 @@ a {
 .docs-hero {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(25rem, 34rem);
-  gap: clamp(2rem, 6vw, 7rem);
+  gap: clamp(2rem, 4vw, 4rem);
   align-items: center;
   min-height: 22.5rem;
   padding-bottom: 4rem;
@@ -328,7 +328,7 @@ a {
 
 .docs-hero__intro {
   display: grid;
-  grid-template-columns: 6.5rem minmax(0, 1fr);
+  grid-template-columns: 6.5rem minmax(0, 58rem);
   column-gap: 2rem;
   align-items: center;
 }
@@ -923,7 +923,7 @@ a {
   }
 
   .page-stack {
-    width: calc(100vw - var(--shell-sidebar-width) - 2rem);
+    padding-inline: 1rem;
   }
 
   .docs-hero,
@@ -997,7 +997,9 @@ a {
   .page-stack,
   .docs-home {
     width: min(100% - 2rem, 48rem);
+    margin: 0 auto;
     padding-top: 2rem;
+    padding-inline: 0;
   }
 
   .docs-hero__intro {
