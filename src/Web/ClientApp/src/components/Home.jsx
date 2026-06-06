@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, BookOpen, CheckCircle2, Database, FileText, Play, ShieldCheck, UserPlus } from 'lucide-react';
+import { ArrowRight, BookOpen, Database, FileText, Play, ShieldCheck, UserPlus } from 'lucide-react';
 import { moduleCatalog } from '../smartlguData';
 
 const starterModules = [
