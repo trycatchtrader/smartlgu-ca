@@ -7,6 +7,12 @@ const demoRows = [
   { name: 'Ana Reyes', barangay: 'Mabini', status: 'Completed', owner: 'Administrator' }
 ];
 
+const moduleMetrics = [
+  { label: 'Demo records', value: '128', detail: 'Seeded mock entries' },
+  { label: 'Avg. turnaround', value: '2.4d', detail: 'Presentation target' },
+  { label: 'Priority queue', value: '18', detail: 'For staff review' }
+];
+
 function getRelatedModules(module) {
   return packageGroups.find((group) => group.name === module.package)?.modules ?? [];
 }
@@ -23,7 +29,22 @@ export function ModulePage({ module }) {
           <p className="eyebrow">{module.package}</p>
           <h1>{module.title}</h1>
           <p>{module.summary}</p>
+          <div className="module-hero__actions">
+            <span>{module.status}</span>
+            <span>Mock/static data</span>
+            <span>Client walkthrough ready</span>
+          </div>
         </div>
+      </section>
+
+      <section className="metric-grid module-metrics" aria-label={`${module.title} demo metrics`}>
+        {moduleMetrics.map((metric) => (
+          <article className="metric-card" key={metric.label}>
+            <span>{metric.label}</span>
+            <strong>{metric.value}</strong>
+            <small>{metric.detail}</small>
+          </article>
+        ))}
       </section>
 
       <section className="module-layout">

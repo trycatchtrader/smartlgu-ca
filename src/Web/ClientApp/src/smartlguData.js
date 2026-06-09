@@ -239,11 +239,11 @@ export const dashboardMetrics = [
 export const navSections = [
   {
     label: 'Overview',
-    links: [{ title: 'SmartLGU Home', path: '/', icon: Home }]
+    links: [{ title: 'Command Center', path: '/', icon: Home }]
   },
   ...packageGroups.map((group) => ({
     label: group.name.replace(' LGU IDS Platform', ''),
-    links: group.modules.filter((module) => module.status === 'Demo flow')
+    links: group.modules
   }))
 ];
 

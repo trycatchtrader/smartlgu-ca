@@ -1,60 +1,48 @@
 import { NavLink } from 'react-router-dom';
-import { Bell, Search } from 'lucide-react';
+import { ChevronRight, Landmark, ShieldCheck } from 'lucide-react';
 import { navSections } from '../smartlguData';
-import { ThemeToggle } from './ThemeToggle';
+
+const sectionToneClass = (index) => ['nav-section--cyan', 'nav-section--lime', 'nav-section--violet', 'nav-section--amber'][index % 4];
 
 export function NavMenu() {
+  const moduleCount = navSections.slice(1).reduce((total, section) => total + section.links.length, 0);
+
   return (
-    <>
-      <aside className="sidebar" aria-label="SmartLGU module navigation">
-        <NavLink className="brand" to="/" aria-label="SmartLGU home">
-          <span className="brand-mark">S</span>
-          <span>
-            <strong>SmartLGU</strong>
-            <small>DIGITAL</small>
-          </span>
-        </NavLink>
+    <aside className="sidebar" aria-label="SmartLGU module navigation">
+      <NavLink className="brand" to="/" aria-label="SmartLGU home">
+        <span className="brand-mark"><Landmark size={20} /></span>
+        <span>
+          <strong>SmartLGU</strong>
+        </span>
+      </NavLink>
 
-        <nav className="sidebar-nav">
-          {navSections.map((section) => (
-            <section key={section.label}>
-              <p>{section.label}</p>
-              {section.links.map((item) => {
-                const Icon = item.icon;
-                return (
-                  <NavLink
-                    className={({ isActive }) => `nav-item${isActive ? ' active' : ''}`}
-                    to={item.path}
-                    key={item.path}
-                  >
-                    <Icon size={16} />
-                    <span>{item.title}</span>
-                  </NavLink>
-                );
-              })}
-            </section>
-          ))}
-        </nav>
-      </aside>
+      <div className="sidebar-overview" aria-label="Prototype status">
+        <span><ShieldCheck size={16} /> Demo workspace</span>
+        <strong>{moduleCount} modules</strong>
+        <small>Mock data only • presentation ready</small>
+      </div>
 
-      <header className="topbar">
-        <label className="topbar-search" aria-label="Search prototype">
-          <Search size={18} />
-          <input type="search" placeholder="Search residents, cases, modules..." />
-          <kbd>Ctrl K</kbd>
-        </label>
-        <div className="topbar-actions">
-          <a className="topbar-link" href="/" aria-label="SmartLGU site">SmartLGU.gov</a>
-          <button className="sign-up-button" type="button">Sign up</button>
-          <button className="icon-only" type="button" aria-label="Repository">
-            <span aria-hidden="true">GH</span>
-          </button>
-          <button className="icon-only" type="button" aria-label="Notifications">
-            <Bell size={17} />
-          </button>
-          <ThemeToggle />
-        </div>
-      </header>
-    </>
+      <nav className="sidebar-nav">
+        {navSections.map((section, index) => (
+          <section className={sectionToneClass(index)} key={section.label}>
+            <p>{section.label}</p>
+            {section.links.map((item) => {
+              const Icon = item.icon;
+              return (
+                <NavLink
+                  className={({ isActive }) => `nav-item${isActive ? ' active' : ''}`}
+                  to={item.path}
+                  key={item.path}
+                >
+                  <span className="nav-item__icon"><Icon size={16} /></span>
+                  <span>{item.title}</span>
+                  <ChevronRight className="nav-item__chevron" size={14} />
+                </NavLink>
+              );
+            })}
+          </section>
+        ))}
+      </nav>
+    </aside>
   );
 }
